@@ -6,7 +6,7 @@
 		"type": "AzureBlobFS",
 		"typeProperties": {
 			"url": "https://bigdatalakegenlab.dfs.core.windows.net/",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIwZDkwOWY2MC1mNjQ1LTQ1NTktYWQ2ZS1lM2RkY2JmNjc0NzciLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjNDg1NjgwYi1mMmE5LTQ1NTMtYTc2YS0zNzI5NDNhMzNkMDAiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "bigdatagateway-adftraining",
