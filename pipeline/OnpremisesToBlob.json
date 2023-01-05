@@ -40,8 +40,7 @@
 					"sink": {
 						"type": "DelimitedTextSink",
 						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings",
-							"copyBehavior": "MergeFiles"
+							"type": "AzureBlobStorageWriteSettings"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
@@ -61,11 +60,8 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_gwf",
-						"type": "DatasetReference",
-						"parameters": {
-							"cw_folderPath": "FlightsAndWeather/@{formatDateTime(pipeline().parameters.windowStart,'yyyy')}/@{formatDateTime(pipeline().parameters.windowStart,'MM')}"
-						}
+						"referenceName": "BlobOutput",
+						"type": "DatasetReference"
 					}
 				]
 			}

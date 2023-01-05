@@ -1,0 +1,22 @@
+{
+	"name": "BlobOutput",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageOutput",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "sparkcontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
