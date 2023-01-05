@@ -1,0 +1,31 @@
+{
+	"name": "SamplezipData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FileServerOnpremise",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "sampledata.zip"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000X\\$V~\f3��\f\u0013\u0000��",
+				"type": "String"
+			},
+			{
+				"name": "\u0000\u0016\u0000\u0000\u0000sampledata/Address.csv���r\u001cG�-���l�!��uB���y�T�R�F�T�~L��\"� R'\u0001H�:6�>kEd$\"\u0012D\u0002쒊�H���/km�\u0017��ы�_w�����&\u001f\u001e>�oo7>nb\u0010Rn��b��\u0014%��{Q!�f�7��\u0014�\f\u0011%ۊ����R-Y�A��\u0007\u0013t\u001f��a��\u0016UM+���o���T�0[!������?\u0014>P��\u000f\u000f�l���~�oM��z",
+				"type": "String"
+			}
+		]
+	}
+}
