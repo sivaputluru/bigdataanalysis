@@ -1,0 +1,126 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "bigdatalabdatafactory0301"
+		},
+		"AzureBlobStorageOutput_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorageOutput'"
+		},
+		"BlobStorageInput_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BlobStorageInput'"
+		},
+		"BlobStorageOutput_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BlobStorageOutput'"
+		},
+		"OnPremServer_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'OnPremServer'"
+		},
+		"OnPremServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'OnPremServer1'"
+		},
+		"OnPremServer_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\adflabvm2\\data"
+		},
+		"OnPremServer_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "developer"
+		},
+		"OnPremServer1_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\adflabvm2\\data"
+		},
+		"OnPremServer1_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "developer"
+		},
+		"Trigger_gwf_properties_OnpremisesToBlob_parameters_windowStart": {
+			"type": "string",
+			"defaultValue": "@trigger().scheduledTime"
+		},
+		"Trigger_nz0_properties_CopyPipeline_nz0_parameters_windowStart": {
+			"type": "string",
+			"defaultValue": "@trigger().scheduledTime"
+		},
+		"Trigger_nz0_properties_CopyPipeline_nz0_parameters_windowEnd": {
+			"type": "string",
+			"defaultValue": "05-01-2023"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "bigdatalabdatafactory0301_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorageOutput_connectionString": {
+						"value": "[parameters('AzureBlobStorageOutput_connectionString')]"
+					},
+					"BlobStorageInput_connectionString": {
+						"value": "[parameters('BlobStorageInput_connectionString')]"
+					},
+					"BlobStorageOutput_connectionString": {
+						"value": "[parameters('BlobStorageOutput_connectionString')]"
+					},
+					"OnPremServer_password": {
+						"value": "[parameters('OnPremServer_password')]"
+					},
+					"OnPremServer1_password": {
+						"value": "[parameters('OnPremServer1_password')]"
+					},
+					"OnPremServer_properties_typeProperties_host": {
+						"value": "[parameters('OnPremServer_properties_typeProperties_host')]"
+					},
+					"OnPremServer_properties_typeProperties_userId": {
+						"value": "[parameters('OnPremServer_properties_typeProperties_userId')]"
+					},
+					"OnPremServer1_properties_typeProperties_host": {
+						"value": "[parameters('OnPremServer1_properties_typeProperties_host')]"
+					},
+					"OnPremServer1_properties_typeProperties_userId": {
+						"value": "[parameters('OnPremServer1_properties_typeProperties_userId')]"
+					},
+					"Trigger_gwf_properties_OnpremisesToBlob_parameters_windowStart": {
+						"value": "[parameters('Trigger_gwf_properties_OnpremisesToBlob_parameters_windowStart')]"
+					},
+					"Trigger_nz0_properties_CopyPipeline_nz0_parameters_windowStart": {
+						"value": "[parameters('Trigger_nz0_properties_CopyPipeline_nz0_parameters_windowStart')]"
+					},
+					"Trigger_nz0_properties_CopyPipeline_nz0_parameters_windowEnd": {
+						"value": "[parameters('Trigger_nz0_properties_CopyPipeline_nz0_parameters_windowEnd')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
