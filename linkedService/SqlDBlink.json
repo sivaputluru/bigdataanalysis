@@ -5,8 +5,8 @@
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=adf-siva-lab-sqlserver.database.windows.net;initial catalog=adf-siva-dev-sqldb;user id=sqladmin",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIwYjlmNWM3NS1mODk3LTQ5ZGUtYTVmYS01MWI2ODRkNWNkZTIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=adf-siva-lab-sqlserver.database.windows.net;initial catalog=AdventureWorksLT;user id=sqladmin",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJmOGNmYWNhZC1lZTY3LTQ3NTUtYjJlNi1lNjg5MTUzNWE5OGYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "bigdatagateway-adftraining",
