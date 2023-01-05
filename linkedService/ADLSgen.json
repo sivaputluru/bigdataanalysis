@@ -1,0 +1,16 @@
+{
+	"name": "ADLSgen",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://labsivadatalakegen.dfs.core.windows.net/",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjNjc5MTIxZC05ZDk0LTRlOGEtOThkOC1iMTk2NWMwZmRkM2QiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "bigdatagateway-adftraining",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
