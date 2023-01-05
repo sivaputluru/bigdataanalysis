@@ -1,0 +1,33 @@
+{
+	"name": "DestinationDataset_gwf",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageOutput",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_folderPath": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "FlightWeather.csv",
+				"folderPath": {
+					"value": "@dataset().cw_folderPath",
+					"type": "Expression"
+				},
+				"container": "sparkcontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

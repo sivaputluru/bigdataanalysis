@@ -1,0 +1,17 @@
+{
+	"name": "Trigger_kpd",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 2,
+				"startTime": "2023-01-04T11:48:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

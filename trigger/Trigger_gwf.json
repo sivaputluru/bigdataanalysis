@@ -1,0 +1,35 @@
+{
+	"name": "Trigger_gwf",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "OnpremisesToBlob",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"windowStart": "@trigger().scheduledTime"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Month",
+				"interval": 1,
+				"startTime": "2023-01-04T10:43:00Z",
+				"timeZone": "UTC",
+				"schedule": {
+					"minutes": [
+						0
+					],
+					"hours": [
+						0
+					]
+				}
+			}
+		}
+	}
+}

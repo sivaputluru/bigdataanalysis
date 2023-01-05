@@ -1,0 +1,104 @@
+{
+	"name": "SourceDataset_efo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "OnPremServer",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "FlightDelaysWithAirportCodes.csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Year",
+				"type": "String"
+			},
+			{
+				"name": "Month",
+				"type": "String"
+			},
+			{
+				"name": "DayofMonth",
+				"type": "String"
+			},
+			{
+				"name": "DayOfWeek",
+				"type": "String"
+			},
+			{
+				"name": "Carrier",
+				"type": "String"
+			},
+			{
+				"name": "CRSDepTime",
+				"type": "String"
+			},
+			{
+				"name": "DepDelay",
+				"type": "String"
+			},
+			{
+				"name": "DepDel15",
+				"type": "String"
+			},
+			{
+				"name": "CRSArrTime",
+				"type": "String"
+			},
+			{
+				"name": "ArrDelay",
+				"type": "String"
+			},
+			{
+				"name": "ArrDel15",
+				"type": "String"
+			},
+			{
+				"name": "Cancelled",
+				"type": "String"
+			},
+			{
+				"name": "OriginAirportCode",
+				"type": "String"
+			},
+			{
+				"name": "OriginAirportName",
+				"type": "String"
+			},
+			{
+				"name": "OriginLatitude",
+				"type": "String"
+			},
+			{
+				"name": "OriginLongitude",
+				"type": "String"
+			},
+			{
+				"name": "DestAirportCode",
+				"type": "String"
+			},
+			{
+				"name": "DestAirportName",
+				"type": "String"
+			},
+			{
+				"name": "DestLatitude",
+				"type": "String"
+			},
+			{
+				"name": "DestLongitude",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

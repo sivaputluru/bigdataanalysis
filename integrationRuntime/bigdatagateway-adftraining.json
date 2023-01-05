@@ -1,0 +1,6 @@
+{
+	"name": "bigdatagateway-adftraining",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
