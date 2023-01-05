@@ -1,0 +1,16 @@
+{
+	"name": "SqlDBlink",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=adf-siva-lab-sqlserver.database.windows.net;initial catalog=adf-siva-dev-sqldb;user id=sqladmin",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIwYjlmNWM3NS1mODk3LTQ5ZGUtYTVmYS01MWI2ODRkNWNkZTIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "bigdatagateway-adftraining",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
