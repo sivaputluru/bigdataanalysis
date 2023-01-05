@@ -2,7 +2,7 @@
 	"name": "Trigger_nz0",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipelines": [
 			{
 				"pipelineReference": {
@@ -10,7 +10,8 @@
 					"type": "PipelineReference"
 				},
 				"parameters": {
-					"windowStart": "@trigger().scheduledTime"
+					"windowStart": "@trigger().scheduledTime",
+					"windowEnd": "05-01-2023"
 				}
 			}
 		],
