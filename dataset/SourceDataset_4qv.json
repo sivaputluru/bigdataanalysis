@@ -1,0 +1,21 @@
+{
+	"name": "SourceDataset_4qv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FileServerOnpremise",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "sampledata.zip"
+			},
+			"compression": {
+				"type": "ZipDeflate",
+				"level": "Optimal"
+			}
+		}
+	}
+}
