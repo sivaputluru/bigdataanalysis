@@ -1,0 +1,66 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Httpoutput",
+						"type": "DatasetReference"
+					},
+					"name": "SourceDB"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {[{\"id\":\"12934481\"} as string,",
+				"          {\"case_number\":\"JF524689\"} as string,",
+				"          {\"date\":\"2022-12-27T23:52:00.000\"} as string,",
+				"          {\"block\":\"056XX S RICHMOND ST\"} as string,",
+				"          {\"iucr\":\"143A\"} as string,",
+				"          {\"primary_type\":\"WEAPONS VIOLATION\"} as string,",
+				"          {\"description\":\"UNLAWFUL POSSESSION - HANDGUN\"} as string,",
+				"          {\"location_description\":\"ALLEY\"} as string,",
+				"          {\"arrest\":true} as string,",
+				"          {\"domestic\":false} as string,",
+				"          {\"beat\":\"0824\"} as string,",
+				"          {\"district\":\"008\"} as string,",
+				"          {\"ward\":\"16\"} as string,",
+				"          {\"community_area\":\"63\"} as string,",
+				"          {\"fbi_code\":\"15\"} as string,",
+				"          {\"x_coordinate\":\"1157672\"} as string,",
+				"          {\"y_coordinate\":\"1867153\"} as string,",
+				"          {\"year\":\"2022\"} as string,",
+				"          {\"updated_on\":\"2023-01-03T15:56:06.000\"} as string,",
+				"          {\"latitude\":\"41.791221284\"} as string,",
+				"          {\"longitude\":\"-87.697389227\"20} as string,",
+				"          {\"location\":{\"latitude\":\"41.791221284\"} as string,",
+				"          {\"longitude\":\"-87.697389227\"22} as string,",
+				"          {\"human_address\":\"{\\\"address\\\": \\\"\\\"} as string,",
+				"          { \\\"city\\\": \\\"\\\"} as string,",
+				"          { \\\"state\\\": \\\"\\\"} as string,",
+				"          { \\\"zip\\\": \\\"\\\"}\"}} as string,",
+				"          {\":@computed_region_awaf_s7ux\":\"49\"} as string,",
+				"          {\":@computed_region_6mkv_f3dw\":\"21867\"} as string,",
+				"          {\":@computed_region_vrxf_vc4k\":\"61\"} as string,",
+				"          {\":@computed_region_bdys_3d7i\":\"764\"} as string,",
+				"          {\":@computed_region_43wa_7qmu\":\"2\"} as string,",
+				"          {\":@computed_region_rpca_8um6\":\"58\"} as string,",
+				"          {\":@computed_region_d9mm_jgwp\":\"13\"} as string,",
+				"          {\":@computed_region_d3ds_rm58\":\"269\"}} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> SourceDB",
+				"SourceDB derive({\"date\":\"2022-12-27T23:52:00.000\"} = ERROR_FUNCTION('')) ~> derivedColumn1"
+			]
+		}
+	}
+}

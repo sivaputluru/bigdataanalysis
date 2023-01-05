@@ -1,0 +1,165 @@
+{
+	"name": "Httpoutput",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLSgen",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "9979194f-a1d7-4cb9-bf3e-e674a16544e5",
+				"folderPath": "htpoutpu",
+				"fileSystem": "sample-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "[{\"id\":\"12934481\"",
+				"type": "String"
+			},
+			{
+				"name": "\"case_number\":\"JF524689\"",
+				"type": "String"
+			},
+			{
+				"name": "\"date\":\"2022-12-27T23:52:00.000\"",
+				"type": "String"
+			},
+			{
+				"name": "\"block\":\"056XX S RICHMOND ST\"",
+				"type": "String"
+			},
+			{
+				"name": "\"iucr\":\"143A\"",
+				"type": "String"
+			},
+			{
+				"name": "\"primary_type\":\"WEAPONS VIOLATION\"",
+				"type": "String"
+			},
+			{
+				"name": "\"description\":\"UNLAWFUL POSSESSION - HANDGUN\"",
+				"type": "String"
+			},
+			{
+				"name": "\"location_description\":\"ALLEY\"",
+				"type": "String"
+			},
+			{
+				"name": "\"arrest\":true",
+				"type": "String"
+			},
+			{
+				"name": "\"domestic\":false",
+				"type": "String"
+			},
+			{
+				"name": "\"beat\":\"0824\"",
+				"type": "String"
+			},
+			{
+				"name": "\"district\":\"008\"",
+				"type": "String"
+			},
+			{
+				"name": "\"ward\":\"16\"",
+				"type": "String"
+			},
+			{
+				"name": "\"community_area\":\"63\"",
+				"type": "String"
+			},
+			{
+				"name": "\"fbi_code\":\"15\"",
+				"type": "String"
+			},
+			{
+				"name": "\"x_coordinate\":\"1157672\"",
+				"type": "String"
+			},
+			{
+				"name": "\"y_coordinate\":\"1867153\"",
+				"type": "String"
+			},
+			{
+				"name": "\"year\":\"2022\"",
+				"type": "String"
+			},
+			{
+				"name": "\"updated_on\":\"2023-01-03T15:56:06.000\"",
+				"type": "String"
+			},
+			{
+				"name": "\"latitude\":\"41.791221284\"",
+				"type": "String"
+			},
+			{
+				"name": "\"longitude\":\"-87.697389227\"20",
+				"type": "String"
+			},
+			{
+				"name": "\"location\":{\"latitude\":\"41.791221284\"",
+				"type": "String"
+			},
+			{
+				"name": "\"longitude\":\"-87.697389227\"22",
+				"type": "String"
+			},
+			{
+				"name": "\"human_address\":\"{\\\"address\\\": \\\"\\\"",
+				"type": "String"
+			},
+			{
+				"name": " \\\"city\\\": \\\"\\\"",
+				"type": "String"
+			},
+			{
+				"name": " \\\"state\\\": \\\"\\\"",
+				"type": "String"
+			},
+			{
+				"name": " \\\"zip\\\": \\\"\\\"}\"}",
+				"type": "String"
+			},
+			{
+				"name": "\":@computed_region_awaf_s7ux\":\"49\"",
+				"type": "String"
+			},
+			{
+				"name": "\":@computed_region_6mkv_f3dw\":\"21867\"",
+				"type": "String"
+			},
+			{
+				"name": "\":@computed_region_vrxf_vc4k\":\"61\"",
+				"type": "String"
+			},
+			{
+				"name": "\":@computed_region_bdys_3d7i\":\"764\"",
+				"type": "String"
+			},
+			{
+				"name": "\":@computed_region_43wa_7qmu\":\"2\"",
+				"type": "String"
+			},
+			{
+				"name": "\":@computed_region_rpca_8um6\":\"58\"",
+				"type": "String"
+			},
+			{
+				"name": "\":@computed_region_d9mm_jgwp\":\"13\"",
+				"type": "String"
+			},
+			{
+				"name": "\":@computed_region_d3ds_rm58\":\"269\"}",
+				"type": "String"
+			}
+		]
+	}
+}

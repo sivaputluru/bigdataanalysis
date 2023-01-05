@@ -1,0 +1,16 @@
+{
+	"name": "HttpDatainSql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlDBlink",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "SalesLT",
+			"table": "Address"
+		}
+	}
+}
