@@ -1,0 +1,57 @@
+{
+	"name": "JSONFlatten",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "JsonFile",
+						"type": "DatasetReference"
+					},
+					"name": "JSONFile"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "JSONCSV",
+						"type": "DatasetReference"
+					},
+					"name": "JSONCSV"
+				}
+			],
+			"transformations": [
+				{
+					"name": "flattenJSON"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          name as string,",
+				"          location as string,",
+				"          satellites as string[],",
+				"          goods as (trade as boolean, customers as string[], orders as (orderId as integer, orderTotal as double, shipped as (orderItems as (itemName as string, itemQty as integer)[]))[])",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'arrayOfDocuments') ~> JSONFile",
+				"JSONFile foldDown(unroll(goods.orders.shipped.orderItems, goods.orders.shipped.orderItems),",
+				"     mapColumn(",
+				"          itemName = goods.orders.shipped.orderItems.itemName,",
+				"          itemQty = goods.orders.shipped.orderItems.itemQty",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flattenJSON",
+				"flattenJSON sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> JSONCSV"
+			]
+		}
+	}
+}

@@ -1,0 +1,75 @@
+{
+	"name": "DemoPivotTransformation",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlProductTable",
+						"type": "DatasetReference"
+					},
+					"name": "SourceProduct"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "PivotSizeColorDB",
+						"type": "DatasetReference"
+					},
+					"name": "sinkPivot"
+				}
+			],
+			"transformations": [
+				{
+					"name": "PivotSizeColor"
+				},
+				{
+					"name": "derivedColumn"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ProductID as integer,",
+				"          Name as string,",
+				"          ProductNumber as string,",
+				"          Color as string,",
+				"          StandardCost as decimal(19,4),",
+				"          ListPrice as decimal(19,4),",
+				"          Size as string,",
+				"          Weight as decimal(8,2),",
+				"          ProductCategoryID as integer,",
+				"          ProductModelID as integer,",
+				"          SellStartDate as timestamp,",
+				"          SellEndDate as timestamp,",
+				"          DiscontinuedDate as timestamp,",
+				"          ThumbNailPhoto as binary,",
+				"          ThumbnailPhotoFileName as string,",
+				"          rowguid as string,",
+				"          ModifiedDate as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> SourceProduct",
+				"derivedColumn pivot(groupBy(Size),",
+				"     pivotBy(Color),",
+				"     avg = avg(StandardCost),",
+				"     columnNaming: '$N_$VCalculated',",
+				"     lateral: true) ~> PivotSizeColor",
+				"SourceProduct derive(Size = iif(isNull(Size)|| Size=='NULL','NA',Size),",
+				"          Color = iif(isNull(Color)|| Color=='NULL','NA',Color)) ~> derivedColumn",
+				"PivotSizeColor sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['PivotSizeColorOutput'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sinkPivot"
+			]
+		}
+	}
+}

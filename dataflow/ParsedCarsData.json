@@ -1,0 +1,62 @@
+{
+	"name": "ParsedCarsData",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "CarsData",
+						"type": "DatasetReference"
+					},
+					"name": "CarsData"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ParsedCarsData",
+						"type": "DatasetReference"
+					},
+					"name": "ParsedCarsSink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "parsedCars"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Car_id as short,",
+				"          Model as string,",
+				"          Colour as string,",
+				"          json_value as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> CarsData",
+				"CarsData parse(json_value = json_value ? (locationid as integer,",
+				"          region as string),",
+				"     format: 'json',",
+				"     documentForm: 'singleDocument') ~> parsedCars",
+				"parsedCars sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['ParsedCarsSink'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Car_id,",
+				"          Model,",
+				"          Colour,",
+				"          locationid = json_value.locationid,",
+				"          region = json_value.region",
+				"     ),",
+				"     partitionBy('hash', 1)) ~> ParsedCarsSink"
+			]
+		}
+	}
+}

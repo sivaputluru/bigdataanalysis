@@ -1,0 +1,117 @@
+{
+	"name": "InitialLoadSmartFoodAllfeedsApiToBlob",
+	"properties": {
+		"activities": [
+			{
+				"name": "LoopSmartFoodsDates",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "LookupDates",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('LookupDates').output.value",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "RunSmartFoodCustomerApiToBlob",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "SmartFoodsLogin",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"date": {
+										"value": "@item().date",
+										"type": "Expression"
+									}
+								}
+							}
+						},
+						{
+							"name": "RunSmartFoodTransactionApiToBlob",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "SmartFoodTransactionApiToBlob",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"date": {
+										"value": "@item().date",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "LookupDates",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "SmartFoodsDelimitedTextBlob",
+						"type": "DatasetReference",
+						"parameters": {
+							"folder": "ref_data",
+							"filename": "dates",
+							"filetype": "csv"
+						}
+					},
+					"firstRowOnly": false
+				}
+			}
+		],
+		"variables": {
+			"dates": {
+				"type": "Array",
+				"defaultValue": [
+					"2020-01-01",
+					"2020-01-02",
+					"2020-01-03",
+					"2020-01-04"
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-12-23T12:31:20Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

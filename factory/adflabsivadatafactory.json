@@ -1,0 +1,9 @@
+{
+	"name": "adflabsivadatafactory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "450962c2-5e4a-4cb9-bbb5-1039dd29953a",
+		"tenantId": "6be89e0e-36ed-4415-9acf-637bc5a010fe"
+	}
+}

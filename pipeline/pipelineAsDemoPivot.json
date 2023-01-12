@@ -1,0 +1,37 @@
+{
+	"name": "pipelineAsDemoPivot",
+	"properties": {
+		"activities": [
+			{
+				"name": "PivotDataFlow",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DemoPivotTransformation",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "WorkingETL"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-12-28T11:30:09Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

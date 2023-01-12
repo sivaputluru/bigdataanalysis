@@ -1,0 +1,18 @@
+{
+	"name": "DestinationimageDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adflabstorageaccountlinked_service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "target"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

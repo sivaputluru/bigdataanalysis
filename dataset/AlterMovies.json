@@ -1,0 +1,17 @@
+{
+	"name": "AlterMovies",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlAdventureWorks",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "AlterMovies"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

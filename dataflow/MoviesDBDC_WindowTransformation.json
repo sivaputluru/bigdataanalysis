@@ -1,0 +1,120 @@
+{
+	"name": "MoviesDBDC_WindowTransformation",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "MoviesDB",
+						"type": "DatasetReference"
+					},
+					"name": "MoviesDBCSV"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AlterMovies",
+						"type": "DatasetReference"
+					},
+					"name": "MoviesDBDCSink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RenameRottonTamato"
+				},
+				{
+					"name": "DerivedPrimaryGenre"
+				},
+				{
+					"name": "RemoveUnwantedColumns"
+				},
+				{
+					"name": "WindowTranformation"
+				},
+				{
+					"name": "aggregateRatings"
+				},
+				{
+					"name": "UpsertIfTrue"
+				},
+				{
+					"name": "surrogateKey"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          movie as integer,",
+				"          title as string,",
+				"          genres as string,",
+				"          year as short,",
+				"          Rating as short,",
+				"          {Rotton Tomato} as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> MoviesDBCSV",
+				"MoviesDBCSV select(mapColumn(",
+				"          movie,",
+				"          title,",
+				"          genres,",
+				"          year,",
+				"          Rating,",
+				"          {Rotten Tomato} = {Rotton Tomato}",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> RenameRottonTamato",
+				"RenameRottonTamato derive(PrimaryGenre = iif(locate('|',genres)>1,left(genres,locate('|',genres)-1),genres)) ~> DerivedPrimaryGenre",
+				"DerivedPrimaryGenre select(mapColumn(",
+				"          movie,",
+				"          title,",
+				"          year,",
+				"          Rating,",
+				"          {Rotten Tomato},",
+				"          PrimaryGenre",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> RemoveUnwantedColumns",
+				"RemoveUnwantedColumns window(over(PrimaryGenre,",
+				"          year),",
+				"     asc({Rotten Tomato}, true),",
+				"     RatingRank = rank()) ~> WindowTranformation",
+				"WindowTranformation aggregate(groupBy(PrimaryGenre,",
+				"          year),",
+				"     AverageRating = avg({Rotten Tomato}),",
+				"          HighestRated = first(title),",
+				"          LowestRated = last(title),",
+				"          NumberOfMovies = count()) ~> aggregateRatings",
+				"aggregateRatings alterRow(upsertIf(true())) ~> UpsertIfTrue",
+				"UpsertIfTrue keyGenerate(output(MovieID as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey",
+				"surrogateKey sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:true,",
+				"     upsertable:true,",
+				"     keys:['PrimaryGenre','year'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PrimaryGenre,",
+				"          year,",
+				"          AverageRating,",
+				"          HighestRated,",
+				"          LowestRated,",
+				"          NumberOfMovies,",
+				"          MovieID",
+				"     ),",
+				"     partitionBy('hash', 1),",
+				"     preCommands: [],",
+				"     postCommands: []) ~> MoviesDBDCSink"
+			]
+		}
+	}
+}

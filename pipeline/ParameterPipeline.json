@@ -1,0 +1,48 @@
+{
+	"name": "ParameterPipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "parameterizedDataflow",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflowParameters",
+						"type": "DataFlowReference",
+						"parameters": {
+							"Status": {
+								"value": "'@{pipeline().parameters.Status}'",
+								"type": "Expression"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"parameters": {
+			"Status": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "WorkingETL"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-12-30T11:49:01Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

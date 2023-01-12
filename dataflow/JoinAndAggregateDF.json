@@ -1,0 +1,99 @@
+{
+	"name": "JoinAndAggregateDF",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "TripDataCSV",
+						"type": "DatasetReference"
+					},
+					"name": "TripDataCSV"
+				},
+				{
+					"dataset": {
+						"referenceName": "TripFares",
+						"type": "DatasetReference"
+					},
+					"name": "TripFareSQL"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AggregatedDB",
+						"type": "DatasetReference"
+					},
+					"name": "AggregateSink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "InnerJoinwithTripFares"
+				},
+				{
+					"name": "aggregateByPaymentType"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          medallion as string,",
+				"          hack_license as string,",
+				"          vendor_id as string,",
+				"          rate_code as string,",
+				"          store_and_fwd_flag as string,",
+				"          pickup_datetime as string,",
+				"          dropoff_datetime as string,",
+				"          passenger_count as string,",
+				"          trip_time_in_secs as string,",
+				"          trip_distance as string,",
+				"          pickup_longitude as string,",
+				"          pickup_latitude as string,",
+				"          dropoff_longitude as string,",
+				"          dropoff_latitude as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> TripDataCSV",
+				"source(output(",
+				"          medallion as string,",
+				"          hack_license as string,",
+				"          vendor_id as string,",
+				"          pickup_datetime as string,",
+				"          payment_type as string,",
+				"          fare_amount as string,",
+				"          surcharge as string,",
+				"          mta_tax as string,",
+				"          tip_amount as string,",
+				"          tolls_amount as string,",
+				"          total_amount as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> TripFareSQL",
+				"TripDataCSV, TripFareSQL join(TripDataCSV@medallion == TripFareSQL@medallion",
+				"     && TripDataCSV@hack_license == TripFareSQL@hack_license",
+				"     && TripDataCSV@vendor_id == TripFareSQL@vendor_id",
+				"     && TripDataCSV@pickup_datetime == TripFareSQL@pickup_datetime,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> InnerJoinwithTripFares",
+				"InnerJoinwithTripFares aggregate(groupBy(payment_type),",
+				"     average_fare = avg(toInteger(total_amount)),",
+				"          total_trip_distance = sum(toInteger(trip_distance))) ~> aggregateByPaymentType",
+				"aggregateByPaymentType sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['AggeratedTripDataAndTripFare'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> AggregateSink"
+			]
+		}
+	}
+}

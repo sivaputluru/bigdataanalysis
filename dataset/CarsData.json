@@ -1,0 +1,39 @@
+{
+	"name": "CarsData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLSGen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "cardata",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "carsData.xlsx",
+				"fileSystem": "sample-data"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Car_id",
+				"type": "String"
+			},
+			{
+				"name": "Model",
+				"type": "String"
+			},
+			{
+				"name": "Colour",
+				"type": "String"
+			},
+			{
+				"name": "json_value",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

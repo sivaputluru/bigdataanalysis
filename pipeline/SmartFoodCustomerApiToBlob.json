@@ -1,0 +1,40 @@
+{
+	"name": "SmartFoodCustomerApiToBlob",
+	"properties": {
+		"activities": [
+			{
+				"name": "AKVUsername",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://adf-siva-dev-kv.vault.azure.net/secrets/SmartFoodsRestAPIUsername/a4fe737374644390b3d9f5bcfcb80711?api-version=7.0",
+					"connectVia": {
+						"referenceName": "ADFLABIG",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"date": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-12-22T11:32:22Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
